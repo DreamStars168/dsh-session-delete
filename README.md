@@ -172,23 +172,6 @@ Four groups: path encoding (`test/paths.test.js`), the delete pipeline (`test/de
 
 `npm run check` includes a privacy scan: absolute user-home paths, API keys, private keys, GitHub tokens, and AWS access keys fail the build. Run it before committing; it catches the overwhelming majority of accidental leaks.
 
-### Point it at your own repo
-
-Repository URLs in `package.json` and the docs use a GitHub username placeholder. Before creating the repo, run:
-
-```bash
-node scripts/rename-repo.mjs <your-github-username> --dry   # preview only
-node scripts/rename-repo.mjs <your-github-username>         # apply
-```
-
-It rewrites all 16 occurrences and realigns the repo name inside each URL.
-
-For the full upload walkthrough (creating the repo, the one-shot script, manual commands, CI, tagging a release, common errors), see **[docs/UPLOAD.md](docs/UPLOAD.md)**. The short version:
-
-```powershell
-.\scripts\publish.ps1
-```
-
 ## License
 
 [MIT](LICENSE)

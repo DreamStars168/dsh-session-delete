@@ -172,23 +172,6 @@ npm test        # 46 项单测，全部在临时目录里跑
 
 `npm run check` 里带一道隐私扫描：本机用户目录绝对路径、API Key、私钥、GitHub token、AWS Access Key 命中即失败。提交前跑一次，能挡住绝大多数误传。
 
-### 换成你自己的仓库
-
-`package.json` 与几份文档里的仓库地址用的是 GitHub 用户名占位符。建仓前跑一次：
-
-```bash
-node scripts/rename-repo.mjs <你的GitHub用户名> --dry   # 只预览，不改文件
-node scripts/rename-repo.mjs <你的GitHub用户名>         # 应用
-```
-
-它会替换全部 16 处，并把 URL 里的仓库名一并对齐。
-
-完整的上传流程（建仓库、一键脚本、手动命令、CI、打标签发版、常见报错）见 **[docs/UPLOAD.md](docs/UPLOAD.md)**。最省事的方式：
-
-```powershell
-.\scripts\publish.ps1
-```
-
 ## 许可
 
 [MIT](LICENSE)
