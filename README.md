@@ -9,6 +9,8 @@ A **DeepSeek Harness** (DSH) plugin that adds a genuinely destructive "Delete se
 
 DSH's built-in "Archive" merely moves a session out of view; the records under `~/.dsh/sessions/` stay exactly where they were. When you actually want a session gone locally, this is the missing action.
 
+![The "Delete session" entry in the session row menu](assets/session-menu.png)
+
 ## Table of contents
 
 - [What it deletes](#what-it-deletes)
@@ -90,6 +92,8 @@ Then point the profile at the absolute path:
 2. Click that row's **"…"** button, or just **right-click** the row — right-click opens the very same native menu.
 3. Choose **Delete session**.
 4. Confirm in the dialog.
+
+The new entry sits in its own section after "Copy Session ID".
 
 If you delete the session you are currently viewing, the main view immediately opens a fresh empty session in the same workspace, so the chat pane never sits on a deleted record.
 

@@ -18,6 +18,7 @@
   "files": [
     "lib",
     "bin",
+    "assets",
     "client.js",
     "cordis.patch.yml",
     "README.md",
