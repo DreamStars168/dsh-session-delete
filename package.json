@@ -1,0 +1,90 @@
+{
+  "name": "dsh-session-delete",
+  "version": "1.1.0",
+  "description": "DeepSeek Harness 插件：给会话行菜单加「删除会话」，彻底删除该会话（含子智能体会话）的日志目录、投影缓存与工作区记账。A DSH plugin that adds a real \"Delete session\" action to the sidebar.",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": "./client.js",
+    "./paths": "./lib/paths.js",
+    "./package.json": "./package.json"
+  },
+  "bin": {
+    "dsh-session-delete": "bin/dsh-session-delete.js"
+  },
+  "files": [
+    "lib",
+    "bin",
+    "docs",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "scripts": {
+    "test": "node test/paths.test.js && node test/delete.test.js && node test/server.test.js && node test/cli.test.js",
+    "check": "node scripts/check-syntax.mjs",
+    "prepublishOnly": "npm run check && npm test"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "dsh-plugins",
+    "deepseek-harness",
+    "session",
+    "session-delete",
+    "sidebar",
+    "cordis",
+    "cordis-plugin",
+    "ui-extension",
+    "隐私清理",
+    "会话管理"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DreamStars168/dsh-session-delete.git"
+  },
+  "homepage": "https://github.com/DreamStars168/dsh-session-delete#readme",
+  "bugs": {
+    "url": "https://github.com/DreamStars168/dsh-session-delete/issues"
+  },
+  "author": "DreamStars168",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18",
+    "dsh": ">=0.2.0"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-slots",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ]
+    },
+    "install": {
+      "preferred": "tarball",
+      "tarball": "https://github.com/DreamStars168/dsh-session-delete/archive/refs/heads/main.tar.gz",
+      "zip": "https://github.com/DreamStars168/dsh-session-delete/archive/refs/heads/main.zip",
+      "git": "https://github.com/DreamStars168/dsh-session-delete.git"
+    },
+    "version": "1.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  }
+}

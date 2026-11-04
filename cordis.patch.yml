@@ -1,0 +1,9 @@
+# dsh-session-delete bundle patch
+#
+# 只有一个 insert：本包自己。
+# Host 半侧提供 /session-delete/api，浏览器半侧给会话行菜单补一条「删除会话」。
+- insert:
+    - id: dsh-session-delete
+      name: 'dsh-session-delete'
+      config:
+        enabled: true

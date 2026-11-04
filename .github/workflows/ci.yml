@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (node ${{ matrix.node }} / ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Static check (syntax + manifest + privacy scan)
+        run: npm run check
+
+      - name: Unit tests
+        run: npm test
+
+      - name: CLI smoke test
+        shell: bash
+        run: |
+          set -euo pipefail
+          home="$(mktemp -d)"
+          node bin/dsh-session-delete.js --help >/dev/null
+          node bin/dsh-session-delete.js --list --dsh-home "$home" | head -n 3
+          node bin/dsh-session-delete.js session-nope --dsh-home "$home"
+
+  package:
+    name: package tarball
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Pack
+        run: npm pack
+
+      - name: Inspect tarball contents
+        run: |
+          set -euo pipefail
+          tgz="$(ls -1t *.tgz | head -n 1)"
+          echo "packed: $tgz"
+          tar -tzf "$tgz"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-tarball
+          path: '*.tgz'
+          retention-days: 7
